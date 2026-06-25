@@ -2,15 +2,65 @@ let gerenciador = {
     tarefas: [],
 
     adicionar: function(titulo, prioridade){
+        let cxTitulo = document.getElementById("ititulo")
+        let valorTitulo = cxTitulo.value
+        let prioridadeSelecionada = document.querySelector('input[name="prioridade"]:checked')
 
+        if(valorTitulo === '' || prioridadeSelecionada === null){
+            alert("Preencha os campos titulo e prioridade")
+            return
+        }
+
+        let tarefa = {
+            id: proximoID,
+
+            titulo: valorTitulo,
+
+            prioridade: prioridadeSelecionada.value,
+            
+            concluida: false,
+
+            criadaEm: new Date()
+        }
+
+        this.tarefas.push(tarefa)
+
+        proximoID ++
+
+        cxTitulo.value = ''
+
+        renderizar(this.tarefas)
+        this.atualizarContadores()
     },
 
     concluir: function(id){
+        for(let i = 0; i < this.tarefas.length; i++){
+           
+            if(this.tarefas[i].id == id){
+                
+                this.tarefas[i].concluida = true
+            
+            }
+        }
 
+        renderizar(this.tarefas)
+        this.atualizarContadores()
     },
 
     remover: function(id){
+        let novaLista = []
 
+        for(let i = 0; i < this.tarefas.length; i++){
+
+            if(this.tarefas[i].id != Number(id)){
+                novaLista.push(this.tarefas[i])
+            }
+
+        }
+
+        this.tarefas = novaLista
+        renderizar(this.tarefas)
+        this.atualizarContadores()
     },
 
     filtrar: function(tipo){
@@ -41,11 +91,11 @@ function renderizar(lista){
         let spanBadge = document.createElement('span')
         let spanTexto = document.createTextNode(lista[i].prioridade)
 
-        if(lista[i].prioridade == 'Alta'){
+        if(lista[i].prioridade == 'Alta' || lista[i].prioridade == 'alta'){
 
             spanBadge.style.color = '#FF4757'
 
-        } else if(lista[i].prioridade == 'Média'){
+        } else if(lista[i].prioridade == 'Média' || lista[i].prioridade == 'media' ){
 
             spanBadge.style.color = '#FFA502'
 
@@ -57,9 +107,35 @@ function renderizar(lista){
 
         spanBadge.appendChild(spanTexto)
 
+        let botaoConcluir = document.createElement("button")
+        let botaoRemover = document.createElement("button")
+        let textoConcluir = document.createTextNode('Concluir')
+        let textoRemover = document.createTextNode("Remover")
+
+        botaoConcluir.appendChild(textoConcluir)
+        botaoRemover.appendChild(textoRemover)
+
+        botaoConcluir.addEventListener('click', function(){
+
+            gerenciador.concluir(lista[i].id)
+
+        })
+
+        botaoRemover.addEventListener('click', function(){
+
+            gerenciador.remover(lista[i].id)
+        })
+
+        novaTarefa.appendChild(botaoConcluir)
+        novaTarefa.appendChild(botaoRemover)
         novaTarefa.appendChild(spanBadge)
 
         areaMostrarTarefa.appendChild(novaTarefa)
     }
 
 }
+
+
+document.getElementById('btn-adicionar').addEventListener('click', function(){
+    gerenciador.adicionar()
+})
