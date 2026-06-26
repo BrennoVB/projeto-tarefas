@@ -64,7 +64,36 @@ let gerenciador = {
     },
 
     filtrar: function(tipo){
+        let listaFiltrada = []
+        filtroAtivo = tipo
 
+        for(let i = 0; i < this.tarefas.length; i++){
+
+            if(tipo == 'todas'){
+
+                listaFiltrada.push(this.tarefas[i])
+
+            } else if(tipo == 'pendentes'){
+
+                if(this.tarefas[i].concluida == false){
+                    listaFiltrada.push(this.tarefas[i])
+                }
+
+            } else if(tipo == 'concluidas'){
+
+                if(this.tarefas[i].concluida == true){
+                    listaFiltrada.push(this.tarefas[i])
+                }
+
+            } else{
+               if(this.tarefas[i].prioridade == tipo){
+                listaFiltrada.push(this.tarefas[i])
+               }
+            }
+
+        }
+
+        renderizar(listaFiltrada)
     },
 
     atualizarContadores: function(){
