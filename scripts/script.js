@@ -97,12 +97,41 @@ let gerenciador = {
     },
 
     atualizarContadores: function(){
+        let totalTarefas = this.tarefas.length
+        let totalTarefasPendentes = 0
+        let totalTarefasConcluidas = 0
+        let estatisticaTotal = document.getElementById("estatistica-total")
+        let estatisticaPendentes = document.getElementById('estatistica-pendentes')
+        let estatisticaConcluidas = document.getElementById("estatistica-concluidas")
+
+        for(let i = 0; i < this.tarefas.length; i++){
+
+            if(this.tarefas[i].concluida == false){
+                totalTarefasPendentes++
+            }
+
+        }
+
+
+        for(let i = 0; i < this.tarefas.length; i++){
+
+            if(this.tarefas[i].concluida == true){
+                totalTarefasConcluidas++
+            }
+
+        }
+
+        estatisticaTotal.textContent = 'Total: ' + totalTarefas
+        estatisticaPendentes.textContent = 'Pendentes: ' + totalTarefasPendentes
+        estatisticaConcluidas.textContent = 'Concluidas: ' + totalTarefasConcluidas
 
     },
 }
 
 let proximoID = 1
 let filtroAtivo = 'todas'
+
+
 
 function renderizar(lista){
 
@@ -119,6 +148,9 @@ function renderizar(lista){
 
         let spanBadge = document.createElement('span')
         let spanTexto = document.createTextNode(lista[i].prioridade)
+        let spanTimer = document.createElement('span')
+
+        spanTimer.setAttribute('id', 'timer-' + lista[i].id)
 
         if(lista[i].prioridade == 'Alta' || lista[i].prioridade == 'alta'){
 
@@ -141,7 +173,7 @@ function renderizar(lista){
         let textoConcluir = document.createTextNode('Concluir')
         let textoRemover = document.createTextNode("Remover")
 
-        botaoConcluir.appendChild(textoConcluir)
+        botaoConcluir.appendChild(textoConcluir) 
         botaoRemover.appendChild(textoRemover)
 
         botaoConcluir.addEventListener('click', function(){
@@ -158,6 +190,7 @@ function renderizar(lista){
         novaTarefa.appendChild(botaoConcluir)
         novaTarefa.appendChild(botaoRemover)
         novaTarefa.appendChild(spanBadge)
+        novaTarefa.appendChild(spanTimer)
 
         areaMostrarTarefa.appendChild(novaTarefa)
     }
@@ -167,4 +200,28 @@ function renderizar(lista){
 
 document.getElementById('btn-adicionar').addEventListener('click', function(){
     gerenciador.adicionar()
+})
+
+document.getElementById('btn-todas').addEventListener('click', function(){
+    gerenciador.filtrar('todas')
+})
+
+document.getElementById('btn-pendentes').addEventListener('click', function(){
+    gerenciador.filtrar('pendentes')
+})
+
+document.getElementById('btn-concluidas').addEventListener('click', function(){
+    gerenciador.filtrar('concluidas')
+})
+
+document.getElementById('btn-alta').addEventListener('click', function(){
+    gerenciador.filtrar('alta')
+})
+
+document.getElementById('btn-media').addEventListener('click', function(){
+    gerenciador.filtrar('media')
+})
+
+document.getElementById('btn-baixa').addEventListener('click', function(){
+    gerenciador.filtrar('baixa')
 })
