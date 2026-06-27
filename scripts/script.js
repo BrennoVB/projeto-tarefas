@@ -30,6 +30,7 @@ let gerenciador = {
         cxTitulo.value = ''
 
         renderizar(this.tarefas)
+        atualizarTimers()
         this.atualizarContadores()
     },
 
@@ -94,6 +95,7 @@ let gerenciador = {
         }
 
         renderizar(listaFiltrada)
+        this.atualizarContadores()
     },
 
     atualizarContadores: function(){
@@ -131,7 +133,23 @@ let gerenciador = {
 let proximoID = 1
 let filtroAtivo = 'todas'
 
+function atualizarTimers(){
+    let tempoDecorrido
+    for(let i = 0; i < gerenciador.tarefas.length; i++){
 
+        tempoDecorrido = new Date()- gerenciador.tarefas[i].criadaEm
+
+        tempoDecorrido = Math.floor(tempoDecorrido / 1000)
+
+        let spanTimer = document.getElementById('timer-' + gerenciador.tarefas[i].id)
+
+        if(spanTimer){
+            spanTimer.textContent = 'Criada a: ' + tempoDecorrido + 's'
+
+        }
+
+}
+}
 
 function renderizar(lista){
 
@@ -144,6 +162,7 @@ function renderizar(lista){
         let novaTarefa = document.createElement('div')
         let tituloNovaTarefa = document.createTextNode(lista[i].titulo)
 
+        novaTarefa.setAttribute('class', 'card-tarefa')
         novaTarefa.appendChild(tituloNovaTarefa)
 
         let spanBadge = document.createElement('span')
@@ -166,6 +185,8 @@ function renderizar(lista){
 
         }
 
+        spanBadge.style.marginRight = '10px'
+
         spanBadge.appendChild(spanTexto)
 
         let botaoConcluir = document.createElement("button")
@@ -176,20 +197,45 @@ function renderizar(lista){
         botaoConcluir.appendChild(textoConcluir) 
         botaoRemover.appendChild(textoRemover)
 
+        botaoConcluir.setAttribute('class', 'btn-concluir')
+        botaoRemover.setAttribute('class', 'btn-remover')
+
         botaoConcluir.addEventListener('click', function(){
 
             gerenciador.concluir(lista[i].id)
 
         })
 
+         if(lista[i].concluida == true){
+                botaoConcluir.setAttribute('disabled', 'disabled')
+            }
+
         botaoRemover.addEventListener('click', function(){
 
             gerenciador.remover(lista[i].id)
         })
 
-        novaTarefa.appendChild(botaoConcluir)
-        novaTarefa.appendChild(botaoRemover)
-        novaTarefa.appendChild(spanBadge)
+        
+        let divTopo = document.createElement('div')
+        divTopo.appendChild(tituloNovaTarefa)
+        divTopo.appendChild(spanBadge)
+
+
+        let divBotoes = document.createElement('div')
+        divBotoes.appendChild(botaoConcluir)
+        divBotoes.appendChild(botaoRemover)
+
+        divTopo.style.display = 'flex'
+        divTopo.style.alignItems = 'center'
+        divTopo.style.gap = '10px'
+
+        divBotoes.style.display = 'flex'
+        divBotoes.style.gap = '10px'
+        divBotoes.style.marginTop = '8px'
+        divBotoes.style.flexWrap = 'wrap'
+
+        novaTarefa.appendChild(divTopo)
+        novaTarefa.appendChild(divBotoes)
         novaTarefa.appendChild(spanTimer)
 
         areaMostrarTarefa.appendChild(novaTarefa)
@@ -225,3 +271,5 @@ document.getElementById('btn-media').addEventListener('click', function(){
 document.getElementById('btn-baixa').addEventListener('click', function(){
     gerenciador.filtrar('baixa')
 })
+
+setInterval(atualizarTimers, 1000)

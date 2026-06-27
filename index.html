@@ -26,42 +26,41 @@
     </div>
 
 
-    <label for="ititulo">Titulo da tarefa: </label>
-    <input type="text" name="titulo" id="ititulo">
-
-    <fieldset>
-        <legend>Tipo de Prioridade:</legend>
+    <div id="area-formulario">
+        <label for="ititulo">Titulo da tarefa: </label>
+        <input type="text" name="titulo" id="ititulo">
+        <fieldset>
+            <legend>Tipo de Prioridade:</legend>
         
-        <input type="radio" name="prioridade" id="iprioridade-alta" value="alta"> 
-        <label for="iprioridade-alta">Alta</label> 
+            <input type="radio" name="prioridade" id="iprioridade-alta" value="alta">
+            <label for="iprioridade-alta">Alta</label>
         
-        <input type="radio" name="prioridade" id="iprioridade-media" value="media"> 
-        <label for="iprioridade-media">Média</label> 
+            <input type="radio" name="prioridade" id="iprioridade-media" value="media">
+            <label for="iprioridade-media">Média</label>
         
-        <input type="radio" name="prioridade" id="iprioridade-baixa" value="baixa"> 
-        <label for="iprioridade-baixa">Baixa</label>
-    </fieldset>
-
-
-    <button id="btn-adicionar">
-        Adicionar  
-    </button>
+            <input type="radio" name="prioridade" id="iprioridade-baixa" value="baixa">
+            <label for="iprioridade-baixa">Baixa</label>
+        </fieldset>
+        <button id="btn-adicionar">
+            Adicionar
+        </button>
+    </div>
     
 
     <div id="area-de-filtros">
         <h2>Filtro</h2>
 
-        <button id="btn-todas">Todas</button>
+        <button id="btn-todas" class="btn-filtro">Todas</button>
 
-        <button id="btn-pendentes">Pendentes</button>
+        <button id="btn-pendentes" class="btn-filtro">Pendentes</button>
         
-        <button id="btn-concluidas">Concluídas</button>
+        <button id="btn-concluidas" class="btn-filtro">Concluídas</button>
 
-        <button id="btn-alta">Alta</button>
+        <button id="btn-alta" class="btn-filtro">Alta</button>
 
-        <button id="btn-media">Média</button>
+        <button id="btn-media" class="btn-filtro">Média</button>
 
-        <button id="btn-baixa">Baixa</button>
+        <button id="btn-baixa" class="btn-filtro">Baixa</button>
     </div>
 
     <div id="mostrar-tarefas">
