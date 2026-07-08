@@ -10,13 +10,13 @@
     --borda: #2A2A3A;
 }
 
-*{
+*{ /* reset global */
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
 }
 
-body{
+body{ /* Corpo do HTML*/
     background-color: var(--bg-principal);
     color: var(--texto-principal);
     font-family: Arial, Helvetica, sans-serif;
@@ -26,13 +26,13 @@ body{
     padding: 20px;
 }
 
-h1{
+h1{ /* Titulo principal*/
     color: var(--cor-principal);
     margin-bottom: 20px;
     text-align: center;
 }
 
-div#estatistica{
+div#estatistica{ /* div onde mostra as estatisticas*/
     background-color: var(--bg-card);
     border-radius: 7px;
     padding: 10px;
@@ -42,7 +42,7 @@ div#estatistica{
     border: 1px solid var(--borda);
 }
 
-div#area-formulario{
+div#area-formulario{ /*div onde ocorre o preenchimento do formulario*/
     background-color: var(--bg-card);
     border-radius: 7px;
     padding: 10px;
@@ -52,11 +52,11 @@ div#area-formulario{
     border: 1px solid var(--borda);  
 }
 
-fieldset {
+fieldset { /* Remove a borda do fieldset*/
     border: none;
 }
 
-div#area-de-filtros{
+div#area-de-filtros{ /*div onde mostra os tipos de filtros*/
     background-color: var(--bg-card);
     border-radius: 7px;
     padding: 10px;
@@ -66,7 +66,7 @@ div#area-de-filtros{
     border: 1px solid var(--borda);
 }
 
-input{
+input{ /*Caixa de texto do formulario*/
     width: 100%;
     padding: 8px;
     border-radius: 7px;
@@ -79,12 +79,12 @@ input{
 
 }
 
-input[type="radio"] {
+input[type="radio"] { /* Caixa onde seleciona os tipos de prioridade*/
     width: auto;
     margin: 0 5px 0 0;
 }
 
-button#btn-adicionar{
+button#btn-adicionar{ /* botão adicionar*/
     width: 100%;
     background-color: var(--cor-principal);
     color: #0A0A0F;
@@ -96,11 +96,11 @@ button#btn-adicionar{
     font-weight: bold;
 }
 
-button#btn-adicionar:hover{
+button#btn-adicionar:hover{ /* botão adicionar ao passar o mouse*/
     opacity: 0.85;
 }
 
-button.btn-filtro{
+button.btn-filtro{ /* botao tipo de filtro*/
     background-color: transparent;
     border: 1px solid var(--borda);
     color: var(--texto-secundario);
@@ -110,12 +110,12 @@ button.btn-filtro{
     margin: 4px;
 }
 
-button.btn-filtro:hover{
+button.btn-filtro:hover{ /* botão tipo de filtro ao passar o mouse*/
     background-color: var(--cor-principal);
     color: var(--texto-principal);
 }
 
-div.card-tarefa{
+div.card-tarefa{ /*div onde mostra as tarefas criadas com manipulação DOM do JS*/
     background-color: var(--bg-card);
     border-radius: 7px;
     padding: 10px;
@@ -125,7 +125,7 @@ div.card-tarefa{
     max-width: 600px;
 }
 
-button.btn-concluir{
+button.btn-concluir{ /* botão concluir*/
     background-color: var(--cor-baixa);
     color: var(--bg-principal);
     border: none;
@@ -135,7 +135,7 @@ button.btn-concluir{
     margin: 10px;
 }
 
-button.btn-remover{
+button.btn-remover{ /* botao remover*/
     background-color: var(--cor-alta);
     color: var(--texto-principal);
     border: none;
@@ -143,4 +143,19 @@ button.btn-remover{
     padding: 10px;
     cursor: pointer;
     margin: 10px;
+}
+
+@media(max-width: 480px){ /*Telas menores*/
+
+    div{
+        padding: 7px;
+    }
+
+    h1{
+        font-size: 24px;
+    }
+
+    button.btn-filtro{
+        padding: 3px 6px;
+    }
 }

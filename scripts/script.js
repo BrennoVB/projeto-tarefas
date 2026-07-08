@@ -1,7 +1,7 @@
-let gerenciador = {
+let gerenciador = { // variável principal do codigo, onde temos os metodos que faz o HTML funcionar com a interação perfeitamente
     tarefas: [],
 
-    adicionar: function(titulo, prioridade){
+    adicionar: function(titulo, prioridade){ // nesse metodo é onde adicionamos as tarefas com seu titulo e nivel de prioridade
         let cxTitulo = document.getElementById("ititulo")
         let valorTitulo = cxTitulo.value
         let prioridadeSelecionada = document.querySelector('input[name="prioridade"]:checked')
@@ -34,7 +34,7 @@ let gerenciador = {
         this.atualizarContadores()
     },
 
-    concluir: function(id){
+    concluir: function(id){ // metodo onde a tarefa é concluída 
         for(let i = 0; i < this.tarefas.length; i++){
            
             if(this.tarefas[i].id == id){
@@ -48,7 +48,7 @@ let gerenciador = {
         this.atualizarContadores()
     },
 
-    remover: function(id){
+    remover: function(id){  // metodo onde a tarefa é removida
         let novaLista = []
 
         for(let i = 0; i < this.tarefas.length; i++){
@@ -64,7 +64,7 @@ let gerenciador = {
         this.atualizarContadores()
     },
 
-    filtrar: function(tipo){
+    filtrar: function(tipo){ // metodo que filtra as tarefas por status (pendentes/concluídas) ou por nível de prioridade
         let listaFiltrada = []
         filtroAtivo = tipo
 
@@ -98,7 +98,7 @@ let gerenciador = {
         this.atualizarContadores()
     },
 
-    atualizarContadores: function(){
+    atualizarContadores: function(){ // metodo onde atualiza o total de cada tipo de tarefa e mostra ao usuario
         let totalTarefas = this.tarefas.length
         let totalTarefasPendentes = 0
         let totalTarefasConcluidas = 0
@@ -133,7 +133,7 @@ let gerenciador = {
 let proximoID = 1
 let filtroAtivo = 'todas'
 
-function atualizarTimers(){
+function atualizarTimers(){ // função que mostra o tempo em que a tarefa foi criada
     let tempoDecorrido
     for(let i = 0; i < gerenciador.tarefas.length; i++){
 
@@ -151,7 +151,7 @@ function atualizarTimers(){
 }
 }
 
-function renderizar(lista){
+function renderizar(lista){ // função principal que mostra toda a lista de tarefas seja ela por qualquer tipo de filtro, ou algum em especifico
 
     let areaMostrarTarefa = document.getElementById("mostrar-tarefas")
 
@@ -244,11 +244,11 @@ function renderizar(lista){
 }
 
 
-document.getElementById('btn-adicionar').addEventListener('click', function(){
+document.getElementById('btn-adicionar').addEventListener('click', function(){  
     gerenciador.adicionar()
 })
 
-document.getElementById('btn-todas').addEventListener('click', function(){
+document.getElementById('btn-todas').addEventListener('click', function(){ 
     gerenciador.filtrar('todas')
 })
 
@@ -272,4 +272,4 @@ document.getElementById('btn-baixa').addEventListener('click', function(){
     gerenciador.filtrar('baixa')
 })
 
-setInterval(atualizarTimers, 1000)
+setInterval(atualizarTimers, 1000) // chama atualizarTimers a cada 1 segundo para manter o timer atualizado
